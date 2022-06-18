@@ -3,12 +3,17 @@ from django.db import models
 
 
 # Create your models here.
-class Note(models.Model):
-    id = models.IntegerField()  # (integer значение)
-    # id = models.BigAutoField(primary_key=True)
-    description = models.TextField() # (text field) 
-    title = models.CharField("ОГЛАВЛЕНИЕ", max_length=256)
-    created_at = models.DateTimeField(auto_now=True) #(datetime, значение должно запис. автома. при создании объекта)
-    updated_at = models.DateTimeField(auto_now_add=True) #(datetime, также записывается автоматически, но при каждом обновлении данных)
-Note.objects.all().order_by('title') # добавить сортировку по-умолчанию по полю title
-    # добавить кастомное отображение в строке: "<Note(id={id объекта}, title={title модели}>"
+class Note(models.Model): 
+    id = models.BigAutoField(primary_key=True)
+    description = models.TextField()
+    title = models.CharField("TITLE", max_length=256)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        ordering = ['title']
+
+
+    def __str__(self):
+        return self.id, self.title
