@@ -6,7 +6,7 @@ from django.db import models
 class Note(models.Model): 
     id = models.BigAutoField(primary_key=True)
     description = models.TextField()
-    title = models.CharField("TITLE", max_length=256)
+    title = models.CharField("title", max_length=256)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
@@ -16,4 +16,5 @@ class Note(models.Model):
 
 
     def __str__(self):
-        return self.id, self.title
+        return f"<Note(id={self.id}, title={self.title})>"
+        
